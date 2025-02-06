@@ -1,3 +1,4 @@
+import 'package:eventurapp/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomInputForm extends StatelessWidget {
@@ -24,37 +25,47 @@ class CustomInputForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      readOnly: readOnly ?? false,
-      onTap: onTap,
-      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w900),
-      maxLines: maxLines ?? 1,
-      obscureText: obscureText ?? false,
-      keyboardType: keyboardType ?? TextInputType.text,
-      cursorColor: Colors.black,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: const Color.fromARGB(255, 250, 80, 128),//change color here
-        border: OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.circular(8),
+    return Container(
+
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0,vertical: 5.0),
+          child: TextFormField(
+            controller: controller,
+            readOnly: readOnly ?? false,
+            onTap: onTap,
+            style: const TextStyle(color: oat1, fontWeight: FontWeight.w900),
+            maxLines: maxLines ?? 1,
+            obscureText: obscureText ?? false,
+            keyboardType: keyboardType ?? TextInputType.text,
+            cursorColor: Color.fromARGB(255, 253, 223, 189),
+            decoration: InputDecoration(
+
+
+              filled: true,
+              fillColor: const Color.fromARGB(255, 1, 1, 1),//change color here
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40),
+              ),
+
+              labelText: label,
+              labelStyle: const TextStyle(
+                color: Color.fromARGB(232, 237, 237, 233),
+                fontWeight: FontWeight.w600,
+              ),
+              hintText: hint,
+              hintStyle: const TextStyle(
+                color: Color.fromARGB(255, 237, 237, 233),
+              ),
+              prefixIcon: Icon(
+                icon,
+                color: Color.fromARGB(163, 237, 237, 233),
+                size: 20,
+              ),
+              floatingLabelBehavior: FloatingLabelBehavior.never,
+            ),
+          ),
         ),
-        labelText: label,
-        labelStyle: const TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.w600,
-        ),
-        hintText: hint,
-        hintStyle: const TextStyle(
-          color: Colors.black,
-        ),
-        prefixIcon: Icon(
-          icon,
-          color: Colors.black,
-        ),
-        floatingLabelBehavior: FloatingLabelBehavior.never,
-      ),
-    );
+      );
+
   }
 }

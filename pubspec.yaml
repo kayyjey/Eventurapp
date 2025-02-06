@@ -64,7 +64,6 @@ flutter_launcher_icons:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -100,3 +99,11 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+  fonts:
+    - family: heliosext
+      fonts:
+        - asset: assets/heliosext.otf
+
+    - family: vipinorg
+      fonts:
+         - asset: assets/vipinorg.otf

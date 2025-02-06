@@ -21,9 +21,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData.dark(
+      theme: ThemeData(
+        fontFamily:"heliosext",
         useMaterial3: true,
-      ).copyWith(textTheme: GoogleFonts.interTextTheme()),
+      ),
       home: const CheckSessions()
     );
   }
