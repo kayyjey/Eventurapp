@@ -145,11 +145,13 @@ class _LoginPageState extends State<LoginPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("EVENTURA", style: TextStyle(fontSize: 14,fontWeight: FontWeight.w900,fontFamily: 'vipinorg',foreground: Paint()
+                      Text("EVENTURA", style: TextStyle(fontSize: 14,fontWeight: FontWeight.w900,fontFamily: 'vipin',foreground: Paint()
                         ..shader = LinearGradient(colors: [
-                                Colors.brown,
-                                Colors.white,],
-                                stops: [0.6, 3.0],
+                                Color.fromARGB(255,155, 95, 77),
+                                Color.fromARGB(255, 175, 125, 104),
+                                Color.fromARGB(255, 237,198, 174)
+                        ],
+                               // stops: [0.6, 3.0],
                                //begin: Alignment.centerRight,
                                // end: Alignment.bottomRight,
                         ).createShader(Rect.fromLTWH(0, 0, 300, 70))),

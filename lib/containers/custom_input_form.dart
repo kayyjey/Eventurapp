@@ -50,11 +50,14 @@ class CustomInputForm extends StatelessWidget {
               labelText: label,
               labelStyle: const TextStyle(
                 color: Color.fromARGB(232, 237, 237, 233),
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w400,
+                fontSize: 15
               ),
               hintText: hint,
               hintStyle: const TextStyle(
                 color: Color.fromARGB(255, 237, 237, 233),
+                fontWeight: FontWeight.w400,
+                fontSize: 15
               ),
               prefixIcon: Icon(
                 icon,
