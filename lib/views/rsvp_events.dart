@@ -1,5 +1,7 @@
+import 'package:eventurapp/constants/colors.dart';
 import 'package:eventurapp/database.dart';
 import 'package:eventurapp/saved_data.dart';
+import 'package:eventurapp/views/event_details.dart';
 import 'package:flutter/material.dart';
 import 'package:appwrite/models.dart';
 
@@ -44,7 +46,12 @@ class _RSVPEventsState extends State<RSVPEvents> {
     return Scaffold(appBar: AppBar(title: Text("RSVP Events"),),
     body: ListView.builder(
         itemCount: userEvents.length,
-        itemBuilder: (context,index) => ListTile(title: Text(userEvents[index].data["name"]),)),
+        itemBuilder: (context,index) => Card(child: ListTile(
+          onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>EventDetails(data: userEvents[index]))),
+          title: Text(userEvents[index].data["name"]),
+          subtitle: Text(userEvents[index].data["location"]),
+          trailing: Icon(Icons.check_circle,color: kLightGreen,),
+        ))),
     );
   }
 }

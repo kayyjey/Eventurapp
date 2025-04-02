@@ -2,6 +2,7 @@ import 'package:eventurapp/auth.dart';
 import 'package:eventurapp/constants/colors.dart';
 import 'package:eventurapp/saved_data.dart';
 import 'package:eventurapp/views/login.dart';
+import 'package:eventurapp/views/manage_events.dart';
 import 'package:eventurapp/views/rsvp_events.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class _ProfileState extends State<Profile> {
               decoration: BoxDecoration(color: oat1,borderRadius: BorderRadius.circular(12)),
               child: Column(children: [
                 ListTile(onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>RSVPEvents())),title: Text("RSVP Events",style: TextStyle(color: brown1),),),
-                ListTile(title: Text("Manage Events",style: TextStyle(color: brown1),),),
+                ListTile(onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ManageEvents())),title: Text("Manage Events",style: TextStyle(color: brown1),),),
                 ListTile(onTap: (){
                   logoutUser();
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));

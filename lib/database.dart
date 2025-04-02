@@ -68,3 +68,35 @@ Future rsvpEvent(List participants, String documentId) async {
     return false;
   }
 }
+
+//list events created by user
+Future manageEvents() async{
+  final userId = SavedData.getUserId();
+  try{
+    final data=await databases.listDocuments(databaseId: databaseId, collectionId: "67a0e4c0002f07688c3c",
+    queries: [Query.equal("createdBy", userId)]);
+    return data.documents;
+  } catch(e){
+    print(e);
+  }
+}
+
+//update event
+Future<void> updateEvent(
+    String name, String desc, String location, String datetime, String image,
+    String createdBy, bool isInPersonOrNot, String actpoints, String price, String docID,
+    )async{
+
+  return await databases.updateDocument(databaseId: databaseId,collectionId: "67a0e4c0002f07688c3c", documentId: docID,
+      data: {
+        "name":name,
+        "description":desc,
+        "image":image,
+        "location":location,
+        "datetime":datetime,
+        "createdBy":createdBy,
+        "isInPerson":isInPersonOrNot,
+        "actpoints":actpoints,
+        "price":price
+      }).then((value)=>print("Event Updated")).catchError((e)=>print(e));
+}

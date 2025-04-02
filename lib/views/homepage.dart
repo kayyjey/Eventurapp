@@ -117,9 +117,10 @@ List<Document> events = [];
 
               SizedBox(width: 12,),
               IconButton(
-                  onPressed: (){
+                  onPressed: () async{
                     //logoutUser();
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Profile()));
+                   await Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
+                   refresh();
                 },
                 icon: Icon(Icons.account_circle_outlined,color: kLightGreen,size: 30,)
               ), //logout button
@@ -144,7 +145,7 @@ List<Document> events = [];
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Hi ${userName}"),
+                    //Text("Hi ${userName}"),
                     Text("Events Around You", style: TextStyle(color: brown1,fontSize: 18, fontWeight: FontWeight.w600),)
                   ],
                 ),
