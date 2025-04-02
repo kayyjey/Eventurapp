@@ -51,6 +51,17 @@ Future getAllEvents() async{
   }
 }
 
+//read hall mapping
+Future getSeating() async{
+  try{
+    final data=await databases.listDocuments(databaseId: databaseId, collectionId: "67ed9478001271a609c6");
+    return data.documents;
+  } catch(e){
+    print(e);
+  }
+}
+
+
 
 //rsvp event
 Future rsvpEvent(List participants, String documentId) async {
@@ -72,10 +83,17 @@ Future rsvpEvent(List participants, String documentId) async {
 //list events created by user
 Future manageEvents() async{
   final userId = SavedData.getUserId();
+  final userRole = SavedData.getUserRole();
   try{
+    if (userRole.toLowerCase() == 'admin'){
+      final data=await databases.listDocuments(databaseId: databaseId, collectionId: "67a0e4c0002f07688c3c");
+    return data.documents;
+    }
+    else{
     final data=await databases.listDocuments(databaseId: databaseId, collectionId: "67a0e4c0002f07688c3c",
     queries: [Query.equal("createdBy", userId)]);
     return data.documents;
+    }
   } catch(e){
     print(e);
   }

@@ -39,6 +39,16 @@ class SavedData {
     return preferences!.getString("email") ?? "";
   }
 
+  // Save user role
+  static Future<void> saveUserRole(String role) async {
+    await preferences!.setString("role", role);
+  }
+
+  // Get the user role
+  static String getUserRole() {
+    return preferences!.getString("role") ?? "";
+  }
+
   // Save user is organized or not
   static Future<void> saveUserIsOrganized(bool isOrganized) async {
     await preferences!.setBool("isOrganized", isOrganized);

@@ -17,9 +17,9 @@ Future <String> createUser(String name, String email, String password) async {
       userId: ID.unique(),  // Unique user ID
       email: email,          // Email from the parameter
       password: password,    // Password from the parameter
-      name: name,            // Name from the parameter
+      name: name, // Name from the parameter
     );
-    saveUserData(name, email, user.$id);
+    saveUserData(name, email, user.$id,);
     return "success";
   }
   on AppwriteException catch(e){
@@ -68,6 +68,7 @@ Future getUserData() async{
 
     SavedData.saveUserName(data.documents[0].data['name']);
     SavedData.saveUserEmail(data.documents[0].data['email']);
+    SavedData.saveUserRole(data.documents[0].data['role']);
     print(data);
   } catch(e){
     print(e);

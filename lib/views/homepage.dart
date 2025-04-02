@@ -26,131 +26,172 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-String userName = "User";
-String userRole = "Event Rep";
-List<Document> events = [];
-bool isLoading = true;
+  String userName = "User";
+  String userRole = "Event Rep";
+  List<Document> events = [];
+  bool isLoading = true;
+  bool isStudentRole = false;
 
   @override
   void initState() {
-    // TODO: implement initState
-    userName=SavedData.getUserName();
-    refresh();
-    //userRole=SavedData.getUserRole();
     super.initState();
+    userName = SavedData.getUserName();
+    userRole = SavedData.getUserRole();
+    loadData(); // Optimized loading function
   }
 
+  Future<void> loadData() async {
+    try {
+      await Future.wait([
+        Future(() {
+          if (userRole.toLowerCase() == 'student') {
+            isStudentRole = true;
+          }
+        }),
+        getAllEvents().then((value) {
+          events = value;
+        }),
+      ]);
+      isLoading = false;
+      setState(() {});
+    } catch (e) {
+      print("Error loading data: $e");
+      isLoading = false; // Prevent indefinite loading
+      setState(() {}); // Update to show error or retry
+    }
+  }
 
-  //refresh the home page
-  void refresh(){
+  void refresh() {
     getAllEvents().then((value) {
-      events=value;
-      isLoading=false;
-      setState(() {
-      });
+      events = value;
+      isLoading = false;
+      setState(() {});
     });
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(75),
         child: Container(
           decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Color.fromARGB(253, 248, 246, 246),
-                Color.fromARGB(0, 243, 243, 242),
-
-              ])
+            gradient: LinearGradient(colors: [
+              Color.fromARGB(253, 248, 246, 246),
+              Color.fromARGB(0, 243, 243, 242),
+            ]),
           ),
           child: AppBar(
             backgroundColor: Colors.transparent,
             foregroundColor: Colors.transparent,
             toolbarHeight: 75,
-            // leading: IconButton(
-            //     onPressed: (){},
-            //     icon: Icon(),color:,),
             actions: [
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                 decoration: BoxDecoration(
-                  color: kLightGreen, // Background color
-                  borderRadius: BorderRadius.circular(12), // Border radius
+                  color: kLightGreen,
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  '$userRole',
+                  "${userRole}",
                   style: TextStyle(
-                    color: Colors.black, // Text color
+                    color: Colors.black,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),//Role Icon
-              SizedBox(width: 10,),
+              ),
+              SizedBox(width: 10),
               IconButton(
-                  onPressed: (){
-                    logoutUser();
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SeatingPage()));
-                  },
-                  icon: Icon(Icons.contact_page_outlined,color: kLightGreen,size: 30,)
-              ), //seating button
-              SizedBox(width: 10,),
-              FocusedMenuHolder(
-                  blurSize: 4,
-                  blurBackgroundColor: Colors.black,
-                  menuWidth: MediaQuery.of(context).size.width * 0.7,
-                  menuBoxDecoration: BoxDecoration(border: null,color: Colors.grey,borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  menuItemExtent: 80,
-                  menuOffset: 10,
-                  animateMenuItems: true,
-                  duration: Duration(milliseconds: 200),
-                  openWithTap: true,
-                  child: Icon(Icons.notifications_none_outlined,color: kLightGreen,size: 30,),
-                  onPressed: (){},
-                  menuItems: <FocusedMenuItem>[
-                    FocusedMenuItem(title: Text("You have no notifications",style: TextStyle(color: oat1, fontSize: 14),), onPressed: (){}, trailingIcon: Icon(Icons.event_busy_outlined,color: oat1,), backgroundColor: kLightGreen)
-                  ]),
-              // IconButton(
-              //     onPressed: (){},
-              //     icon: Icon(Icons.notifications_none_outlined,color: kLightGreen,size: 30,)
-              // ), //notification button
-
-              SizedBox(width: 12,),
-              IconButton(
-                  onPressed: () async{
-                    //logoutUser();
-                   await Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
-                   refresh();
+                onPressed: () {
+                  logoutUser();
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => SeatingPage()));
                 },
-                icon: Icon(Icons.account_circle_outlined,color: kLightGreen,size: 30,)
-              ), //logout button
+                icon: Icon(
+                  Icons.contact_page_outlined,
+                  color: kLightGreen,
+                  size: 30,
+                ),
+              ),
+              SizedBox(width: 10),
+              FocusedMenuHolder(
+                blurSize: 4,
+                blurBackgroundColor: Colors.black,
+                menuWidth: MediaQuery.of(context).size.width * 0.7,
+                menuBoxDecoration: BoxDecoration(
+                    border: null,
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                menuItemExtent: 80,
+                menuOffset: 10,
+                animateMenuItems: true,
+                duration: Duration(milliseconds: 200),
+                openWithTap: true,
+                child: Icon(
+                  Icons.notifications_none_outlined,
+                  color: kLightGreen,
+                  size: 30,
+                ),
+                onPressed: () {},
+                menuItems: <FocusedMenuItem>[
+                  FocusedMenuItem(
+                      title: Text(
+                        "You have no notifications",
+                        style: TextStyle(color: oat1, fontSize: 14),
+                      ),
+                      onPressed: () {},
+                      trailingIcon: Icon(
+                        Icons.event_busy_outlined,
+                        color: oat1,
+                      ),
+                      backgroundColor: kLightGreen)
+                ],
+              ),
+              SizedBox(width: 12),
+              IconButton(
+                onPressed: () async {
+                  await Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Profile()));
+                  refresh();
+                },
+                icon: Icon(
+                  Icons.account_circle_outlined,
+                  color: kLightGreen,
+                  size: 30,
+                ),
+              ),
             ],
           ),
         ),
       ),
-      body: //frontend demo start
-      Container(
+      body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
               Color.fromARGB(253, 248, 246, 246),
               Color.fromARGB(0, 243, 243, 242),
-
-            ])
-        ),
+            ])),
         child: CustomScrollView(
           slivers: [
-              //home layout code below
-              SliverToBoxAdapter(child: Padding(
+            SliverToBoxAdapter(
+              child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    //Text("Hi ${userName}"),
-                    Text("Events Around You", style: TextStyle(color: brown1,fontSize: 18, fontWeight: FontWeight.w600),),
+                    Text(
+                      "Events Around You",
+                      style: TextStyle(
+                          color: kLightGreen, fontSize: 18, fontWeight: FontWeight.w600),
+                    ),
                     isLoading
                         ? const SizedBox()
                         : CarouselSlider(
@@ -163,7 +204,7 @@ bool isLoading = true;
                         scrollDirection: Axis.horizontal,
                       ),
                       items: List.generate(
-                        events.length.clamp(0, 4), // Ensures index stays within bounds
+                        events.length.clamp(0, 4),
                             (index) => EventContainer(
                           data: events[index],
                         ),
@@ -180,22 +221,29 @@ bool isLoading = true;
                     ),
                   ],
                 ),
-              ),),
-              SliverList(delegate: SliverChildBuilderDelegate((context,index) => EventContainer(data: events[index]),
-              childCount: events.length
-              ))
-
-              //end of home layout code
-            ],
+              ),
+            ),
+            SliverList(
+                delegate: SliverChildBuilderDelegate(
+                        (context, index) => EventContainer(data: events[index]),
+                    childCount: events.length))
+          ],
         ),
-      ),//end of front end only page
-      floatingActionButton: FloatingActionButton(
+      ),
+      floatingActionButton: isStudentRole
+          ? null
+          : FloatingActionButton(
         onPressed: () async {
-         await Navigator.push(context,MaterialPageRoute(builder: (context)=>CreateEventPage()));
-         refresh();
+          await Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CreateEventPage()));
+          refresh();
         },
-        child: Icon(Icons.add,color: Colors.black,),backgroundColor: kLightGreen,
-      ),//add event button
+        child: Icon(
+          Icons.add,
+          color: Colors.black,
+        ),
+        backgroundColor: kLightGreen,
+      ),
     );
   }
 }

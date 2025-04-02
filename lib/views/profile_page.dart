@@ -17,12 +17,14 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   String name = "";
   String email = "";
+  String role = "";
 
   @override
   void initState() {
     super.initState();
     name = SavedData.getUserName();
     email = SavedData.getUserEmail();
+    role = SavedData.getUserRole();
   }
 
   @override
@@ -48,6 +50,7 @@ class _ProfileState extends State<Profile> {
               decoration: BoxDecoration(color: Colors.brown[200],borderRadius: BorderRadius.circular(12)),
               child: Column(children: [
                 ListTile(onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>RSVPEvents())),title: Text("RSVP Events",style: TextStyle(color: brown1),),),
+                if (role.toLowerCase() != 'student')
                 ListTile(onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ManageEvents())),title: Text("Manage Events",style: TextStyle(color: brown1),),),
                 ListTile(onTap: (){
                   logoutUser();
