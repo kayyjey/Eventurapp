@@ -1,4 +1,5 @@
 import 'package:appwrite/models.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eventurapp/auth.dart';
 import 'package:eventurapp/constants/colors.dart';
 import 'package:eventurapp/containers/event_container.dart';
@@ -28,6 +29,8 @@ class _HomepageState extends State<Homepage> {
 String userName = "User";
 String userRole = "Event Rep";
 List<Document> events = [];
+bool isLoading = true;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -42,6 +45,7 @@ List<Document> events = [];
   void refresh(){
     getAllEvents().then((value) {
       events=value;
+      isLoading=false;
       setState(() {
       });
     });
@@ -146,7 +150,34 @@ List<Document> events = [];
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //Text("Hi ${userName}"),
-                    Text("Events Around You", style: TextStyle(color: brown1,fontSize: 18, fontWeight: FontWeight.w600),)
+                    Text("Events Around You", style: TextStyle(color: brown1,fontSize: 18, fontWeight: FontWeight.w600),),
+                    isLoading
+                        ? const SizedBox()
+                        : CarouselSlider(
+                      options: CarouselOptions(
+                        autoPlay: true,
+                        autoPlayInterval: const Duration(seconds: 5),
+                        aspectRatio: 16 / 9,
+                        viewportFraction: 0.99,
+                        enlargeCenterPage: true,
+                        scrollDirection: Axis.horizontal,
+                      ),
+                      items: List.generate(
+                        events.length.clamp(0, 4), // Ensures index stays within bounds
+                            (index) => EventContainer(
+                          data: events[index],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      "Popular Events ",
+                      style: TextStyle(
+                        color: kLightGreen,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
               ),),
