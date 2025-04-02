@@ -204,11 +204,11 @@ class _CreateEventPageState extends State<CreateEventPage> {
                   child: MaterialButton(
                   color: kLightGreen,
                     onPressed: (){
-                    if(_nameController.text==""||_descController.text==""||_locationController.text==""||_dateTimeController==""){
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Event Name,Description,Location,Date & Time are required"),));
+                    if(_filePickerResult == null||_nameController.text==""||_descController.text==""||_locationController.text==""||_dateTimeController==""){
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Event Image,Event Name,Description,Location,Date & Time are required"),));
                     }
                     else {
-                      uploadEventImage().then((value)=> createEvent(_nameController.text, _descController.text, _locationController.text, _dateTimeController.text, value, userId, _isInPersonEvent, _activityPointsController.text, _priceController.text))
+                      uploadEventImage().then((value)=> createEvent(_nameController.text, _descController.text, _locationController.text, _dateTimeController.text, value,userId, _isInPersonEvent, _activityPointsController.text, _priceController.text))
                           .then((value)=> {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Event Created")),),
                       Navigator.pop(context),

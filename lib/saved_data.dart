@@ -3,10 +3,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SavedData {
   static SharedPreferences? preferences;
 
-  static Future<void> init() async{
+  static Future<void> init() async {
     preferences = await SharedPreferences.getInstance();
-
   }
+
   // Save user id on device
 
   static Future<void> saveUserId(String id) async {
@@ -29,7 +29,7 @@ class SavedData {
     return preferences!.getString("name") ?? "";
   }
 
-  // Save user email
+// Save user email
   static Future<void> saveUserEmail(String email) async {
     await preferences!.setString("email", email);
   }
@@ -39,4 +39,20 @@ class SavedData {
     return preferences!.getString("email") ?? "";
   }
 
+  // Save user is organized or not
+  static Future<void> saveUserIsOrganized(bool isOrganized) async {
+    await preferences!.setBool("isOrganized", isOrganized);
+    print("saved isOrganized : $isOrganized");
+  }
+
+  // Get the user is organized or not
+  static bool getUserIsOrganized() {
+    return preferences!.getBool("isOrganized") ?? false;
+  }
+
+  // clear the saved data
+  static Future<void> clearSavedData() async {
+    await preferences!.clear();
+    print("saved data cleared");
+  }
 }

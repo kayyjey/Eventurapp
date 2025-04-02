@@ -43,7 +43,7 @@ import 'package:eventurapp/constants/colors.dart';
         );
       }
 
-      String seatingimage = "assets/test_event_images/hallmapping.JPG";
+      String seatingimage = "assets/test_event_images/hallmapping.jpg";
 
 
       @override

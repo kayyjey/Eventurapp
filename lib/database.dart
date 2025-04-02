@@ -1,5 +1,6 @@
 
 import 'package:appwrite/appwrite.dart';
+import 'package:eventurapp/saved_data.dart';
 
 import 'auth.dart';
 
@@ -11,7 +12,7 @@ final Databases databases=Databases(client);
 Future <void> saveUserData(String name, String email, String userId) async {
   return await databases.createDocument(
       databaseId: databaseId,
-      collectionId: "6797c15e0022f1ca60ae",
+      collectionId: "67ec10e4002754709764",
       documentId: ID.unique(),
       data: {
        "name":name,
@@ -41,11 +42,29 @@ Future<void> createEvent(
 }
 
 //read all events
-Future getAllEvents()async{
+Future getAllEvents() async{
   try{
     final data=await databases.listDocuments(databaseId: databaseId, collectionId: "67a0e4c0002f07688c3c");
         return data.documents;
   } catch(e){
     print(e);
+  }
+}
+
+
+//rsvp event
+Future rsvpEvent(List participants, String documentId) async {
+  final userId = SavedData.getUserId();
+  participants.add(userId);
+  try {
+    await databases.updateDocument(
+        databaseId: databaseId,
+        collectionId: "67a0e4c0002f07688c3c",
+        documentId: documentId,
+        data: {"participants": participants});
+    return true;
+  } catch (e) {
+    print(e);
+    return false;
   }
 }

@@ -32,8 +32,8 @@ Future <String> createUser(String name, String email, String password) async {
 Future loginUser(String email, String password) async {
   try{
     final user = await account.createEmailSession(email: email, password: password);
-    getUserData();
     SavedData.saveUserId(user.userId);
+    getUserData();
     return true;
   }
   on AppwriteException catch(e){
@@ -44,6 +44,7 @@ Future loginUser(String email, String password) async {
 //logout
 Future logoutUser() async {
   await account.deleteSession(sessionId: 'current');
+  print("Logout process complete");
 }
 
 //check if use has active session
@@ -62,7 +63,7 @@ Future<bool> checkSessions() async {
 Future getUserData() async{
   final id = SavedData.getUserId();
   try{
-    final data = await databases.listDocuments(databaseId: databaseId, collectionId: "6797c15e0022f1ca60ae",
+    final data = await databases.listDocuments(databaseId: databaseId, collectionId: "67ec10e4002754709764",
     queries: [Query.equal("userId", id)]);
 
     SavedData.saveUserName(data.documents[0].data['name']);
