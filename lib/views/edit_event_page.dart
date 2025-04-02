@@ -193,7 +193,7 @@ class _EditEventPageState extends State<EditEventPage> {
 
                 Row(
                   children: [
-                    Text("In Person Event", style: TextStyle(color: kLightGreen, fontSize: 20),),
+                    Text("In Person Event", style: TextStyle(color: kLightGreen, fontSize: 20, fontWeight: FontWeight.w600),),
                     Spacer(),
                     Switch(
                         activeColor: kLightGreen,
@@ -248,7 +248,38 @@ class _EditEventPageState extends State<EditEventPage> {
                     child: Text("Update Event",
                       style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900, fontSize: 20),),
                   ),
-                )
+                ),
+                SizedBox(height: 12,),
+                Text("Danger Zone",style: TextStyle(color: Colors.red, fontWeight: FontWeight.w600, fontSize: 20),),
+                SizedBox(height: 8,),
+            SizedBox(
+              height: 50,
+              width: double.infinity,
+              child: MaterialButton(
+                color: Colors.red[400],
+                onPressed: (){
+                  showDialog(context: context, builder: (context)=> AlertDialog(
+                    title: Text("Are you sure?",style: TextStyle(color: kLightGreen),),
+                  content: Text("Your event will be deleted",style: TextStyle(color: kLightGreen)),
+                    actions: [
+                      TextButton(onPressed: (){
+                        deleteEvent(widget.docID).then((value) async{
+                          await storage.deleteFile(bucketId: "67a0ea89003df90b8242",fileId: widget.image);
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Event has been Deleted Successfully")));
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                        });
+                      }, child: Text("Yes",style: TextStyle(color: Colors.red[400]),)),
+                      TextButton(onPressed: (){
+                        Navigator.pop(context);
+                      }, child: Text("No",style: TextStyle(color: brown1))),
+                    ],
+                  ));
+                },
+                child: Text("Delete Event",
+                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900, fontSize: 20),),
+              ),
+            ),
 
               ],
             ),

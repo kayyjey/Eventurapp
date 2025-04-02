@@ -45,7 +45,7 @@ class _ProfileState extends State<Profile> {
           Expanded(
             child: Container(
               width: double.infinity,
-              decoration: BoxDecoration(color: oat1,borderRadius: BorderRadius.circular(12)),
+              decoration: BoxDecoration(color: Colors.brown[200],borderRadius: BorderRadius.circular(12)),
               child: Column(children: [
                 ListTile(onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>RSVPEvents())),title: Text("RSVP Events",style: TextStyle(color: brown1),),),
                 ListTile(onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ManageEvents())),title: Text("Manage Events",style: TextStyle(color: brown1),),),

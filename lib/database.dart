@@ -100,3 +100,14 @@ Future<void> updateEvent(
         "price":price
       }).then((value)=>print("Event Updated")).catchError((e)=>print(e));
 }
+
+//deleting event
+Future deleteEvent(String docID) async{
+  try{
+    final response = await databases.deleteDocument(databaseId: databaseId, collectionId: "67a0e4c0002f07688c3c", documentId: docID);
+    print(response);
+  }
+  catch(e){
+    print(e);
+  }
+}
