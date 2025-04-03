@@ -91,86 +91,103 @@ class _HomepageState extends State<Homepage> {
           ),
           child: AppBar(
             backgroundColor: Colors.transparent,
-            foregroundColor: Colors.transparent,
+            elevation: 0,
             toolbarHeight: 75,
-            actions: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                decoration: BoxDecoration(
-                  color: kLightGreen,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Text(
-                  "${userRole}",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Left Side: Profile Icon
+                IconButton(
+                  onPressed: () async {
+                    await Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => Profile()));
+                    refresh();
+                  },
+                  icon: Icon(
+                    Icons.account_circle_outlined,
+                    color: kLightGreen,
+                    size: 30,
                   ),
                 ),
-              ),
-              SizedBox(width: 10),
-              IconButton(
-                onPressed: () {
-                  logoutUser();
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => SeatingPage()));
-                },
-                icon: Icon(
-                  Icons.contact_page_outlined,
-                  color: kLightGreen,
-                  size: 30,
+                
+
+                // Center: Container (User Role)
+                Expanded(
+                  child: Align(
+                    alignment: Alignment(0.2,3),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 18, vertical: 7),
+                      decoration: BoxDecoration(
+                        color: kLightGreen,
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                      child: Text(
+                        "${userRole}",
+                        style: TextStyle(
+                          color: oat1,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-              SizedBox(width: 10),
-              FocusedMenuHolder(
-                blurSize: 4,
-                blurBackgroundColor: Colors.black,
-                menuWidth: MediaQuery.of(context).size.width * 0.7,
-                menuBoxDecoration: BoxDecoration(
-                    border: null,
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                menuItemExtent: 80,
-                menuOffset: 10,
-                animateMenuItems: true,
-                duration: Duration(milliseconds: 200),
-                openWithTap: true,
-                child: Icon(
-                  Icons.notifications_none_outlined,
-                  color: kLightGreen,
-                  size: 30,
-                ),
-                onPressed: () {},
-                menuItems: <FocusedMenuItem>[
-                  FocusedMenuItem(
-                      title: Text(
-                        "You have no notifications",
-                        style: TextStyle(color: oat1, fontSize: 14),
+
+                // Right Side: Logout + Notifications
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        logoutUser();
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => SeatingPage()));
+                      },
+                      icon: Icon(
+                        Icons.contact_page_outlined,
+                        color: kLightGreen,
+                        size: 30,
+                      ),
+                    ),
+                    FocusedMenuHolder(
+                      blurSize: 4,
+                      blurBackgroundColor: Colors.black,
+                      menuWidth: MediaQuery.of(context).size.width * 0.7,
+                      menuBoxDecoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                      ),
+                      menuItemExtent: 80,
+                      menuOffset: 10,
+                      animateMenuItems: true,
+                      duration: Duration(milliseconds: 200),
+                      openWithTap: true,
+                      child: Icon(
+                        Icons.notifications_none_outlined,
+                        color: kLightGreen,
+                        size: 30,
                       ),
                       onPressed: () {},
-                      trailingIcon: Icon(
-                        Icons.event_busy_outlined,
-                        color: oat1,
-                      ),
-                      backgroundColor: kLightGreen)
-                ],
-              ),
-              SizedBox(width: 12),
-              IconButton(
-                onPressed: () async {
-                  await Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Profile()));
-                  refresh();
-                },
-                icon: Icon(
-                  Icons.account_circle_outlined,
-                  color: kLightGreen,
-                  size: 30,
+                      menuItems: <FocusedMenuItem>[
+                        FocusedMenuItem(
+                          title: Text(
+                            "You have no notifications",
+                            style: TextStyle(color: oat1, fontSize: 14),
+                          ),
+                          onPressed: () {},
+                          trailingIcon: Icon(
+                            Icons.event_busy_outlined,
+                            color: oat1,
+                          ),
+                          backgroundColor: kLightGreen,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
+
         ),
       ),
       body: Container(
@@ -187,21 +204,26 @@ class _HomepageState extends State<Homepage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Events Around You",
-                      style: TextStyle(
-                          color: kLightGreen, fontSize: 18, fontWeight: FontWeight.w600),
+                    Center(
+                      child: Text(
+                        "Events Around You",
+                        style: TextStyle(
+                            color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500,),
+                      ),
                     ),
                     isLoading
                         ? const SizedBox()
                         : CarouselSlider(
                       options: CarouselOptions(
                         autoPlay: true,
-                        autoPlayInterval: const Duration(seconds: 5),
+                        autoPlayInterval: Duration(milliseconds: 100),
+                        autoPlayAnimationDuration: Duration(milliseconds: 8000),
+                        autoPlayCurve: Curves.linear,
                         aspectRatio: 16 / 9,
-                        viewportFraction: 0.99,
-                        enlargeCenterPage: true,
-                        scrollDirection: Axis.horizontal,
+                        viewportFraction: 1.0,
+                        enlargeCenterPage: false,
+                        scrollPhysics: NeverScrollableScrollPhysics(),
+
                       ),
                       items: List.generate(
                         events.length.clamp(0, 4),
@@ -211,12 +233,15 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    Text(
-                      "Popular Events ",
-                      style: TextStyle(
-                        color: kLightGreen,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                    Center(
+                      child: Text(
+                        " Events ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'vipinorg',
+                        ),
                       ),
                     ),
                   ],

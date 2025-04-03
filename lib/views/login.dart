@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       borderRadius: BorderRadius.circular(35), // Same radius as button
                     ),
-                    padding: EdgeInsets.all(3), // Border thickness
+                    padding: EdgeInsets.all(3),  // Border thickness
                     child: ElevatedButton(
                       onPressed: () {
                         loginUser(_emailController.text, _passwordController.text).then((value) {

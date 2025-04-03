@@ -128,28 +128,32 @@ class _CreateEventPageState extends State<CreateEventPage> {
                         icon: Icon(Icons.arrow_back_ios_new_outlined, size: 26, color: kLightGreen,),
                     ),
                     SizedBox(width: 10,),
-                    CustomHeadtext(text: "Create Event"),
+                    DefaultTextStyle(style:TextStyle(color: Colors.blue, fontSize: 20, fontWeight: FontWeight.bold),
+                    child: CustomHeadtext(text: "Create Event")),
                   ],
                 ),
                 SizedBox(height: 15,),
                 GestureDetector(
                   onTap: ()=>_openFilePicker(),
-                  child: Container(
-                    width: double.infinity,
-                    height: MediaQuery.of(context).size.height*.3,
-                    decoration: BoxDecoration(color: kLightGreen,borderRadius: BorderRadius.circular(8)),
-                    child: _filePickerResult!=null?
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image(image: FileImage(File(_filePickerResult!.files.first.path!)),
-                      fit: BoxFit.fill,),
-                    ):
-                    Column(mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                      Icon(Icons.add_a_photo_outlined,size: 42,color: Colors.black,),
-                      SizedBox(height: 8,),
-                      Text("Attach Image",style: TextStyle(fontFamily: 'Helio',color: Colors.black,fontWeight: FontWeight.w600),)
-                    ],),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height*.3,
+                      decoration: BoxDecoration(color: Colors.black,borderRadius: BorderRadius.circular(15)),
+                      child: _filePickerResult!=null?
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image(image: FileImage(File(_filePickerResult!.files.first.path!)),
+                        fit: BoxFit.fill,),
+                      ):
+                      Column(mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                        Icon(Icons.add_a_photo_outlined,size: 42,color: oat1,),
+                        SizedBox(height: 8,),
+                        Text("Attach Image",style: TextStyle(fontFamily: 'Helio',color:oat1,fontWeight: FontWeight.w600),)
+                      ],),
+                    ),
                   ),
                 ),
                 SizedBox(height: 8,),
