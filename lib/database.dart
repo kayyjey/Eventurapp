@@ -1,5 +1,6 @@
 
 import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/models.dart';
 import 'package:eventurapp/saved_data.dart';
 
 import 'auth.dart';
@@ -98,6 +99,54 @@ Future manageEvents() async{
     print(e);
   }
 }
+
+
+//list all users
+Future manageUser() async{
+  final userRole = SavedData.getUserRole();
+  try{
+    if (userRole.toLowerCase() == 'admin'){
+      final data=await databases.listDocuments(databaseId: databaseId, collectionId: "67ec10e4002754709764");
+      return data.documents;
+    }
+  } catch(e){
+    print(e);
+  }
+}
+
+
+// Update user role
+Future<Document?> updateRole(String userId, String role) async {
+  try {
+    final documents = await databases.listDocuments(
+      databaseId: databaseId,
+      collectionId: "67ec10e4002754709764",
+      queries: [Query.equal("userId", userId)],
+    );
+
+    if (documents.documents.isNotEmpty) {
+      final documentId = documents.documents[0].$id;
+
+      final updatedDocument = await databases.updateDocument(
+        databaseId: databaseId,
+        collectionId: "67ec10e4002754709764",
+        documentId: documentId,
+        data: {"role": role},
+      );
+
+      print("User role updated successfully");
+      return updatedDocument;
+    } else {
+      print("User not found");
+      return null;
+    }
+  } on AppwriteException catch (e) {
+    print("Error updating user role: ${e.message}");
+    return null;
+  }
+}
+
+
 
 //update event
 Future<void> updateEvent(

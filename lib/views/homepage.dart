@@ -93,6 +93,7 @@ class _HomepageState extends State<Homepage> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             toolbarHeight: 75,
+            automaticallyImplyLeading: false,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

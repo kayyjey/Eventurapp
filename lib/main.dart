@@ -5,6 +5,7 @@ import 'package:eventurapp/views/login.dart';
 import 'package:eventurapp/views/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'notification_service.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    NotificationService notificationService = NotificationService();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
