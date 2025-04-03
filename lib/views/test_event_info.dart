@@ -1,6 +1,6 @@
+import 'package:eventurapp/constants/colors.dart';
 import 'package:eventurapp/containers/custom_headtext.dart';
 import 'package:flutter/material.dart';
-import 'package:eventurapp/constants/colors.dart';
 
 class EventInfoPage extends StatefulWidget {
   const EventInfoPage({super.key});

@@ -3,7 +3,6 @@ import 'package:eventurapp/constants/colors.dart';
 import 'package:eventurapp/database.dart';
 import 'package:eventurapp/views/edit_event_page.dart';
 import 'package:eventurapp/views/event_details.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ManageEvents extends StatefulWidget {

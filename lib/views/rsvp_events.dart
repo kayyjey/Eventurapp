@@ -1,9 +1,9 @@
+import 'package:appwrite/models.dart';
 import 'package:eventurapp/constants/colors.dart';
 import 'package:eventurapp/database.dart';
 import 'package:eventurapp/saved_data.dart';
 import 'package:eventurapp/views/event_details.dart';
 import 'package:flutter/material.dart';
-import 'package:appwrite/models.dart';
 
 class RSVPEvents extends StatefulWidget {
   const RSVPEvents({super.key});

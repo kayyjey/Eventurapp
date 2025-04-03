@@ -1,5 +1,4 @@
 import 'package:appwrite/models.dart';
-import 'package:eventurapp/constants/colors.dart';
 import 'package:eventurapp/containers/format_datetime.dart';
 import 'package:eventurapp/database.dart';
 import 'package:eventurapp/saved_data.dart';

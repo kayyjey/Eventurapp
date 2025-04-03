@@ -2,9 +2,6 @@ import 'package:appwrite/models.dart';
 import 'package:eventurapp/constants/colors.dart';
 import 'package:eventurapp/containers/format_datetime.dart';
 import 'package:eventurapp/views/event_details.dart';
-import 'package:eventurapp/containers/format_datetime.dart';
-import 'package:eventurapp/views/event_details.dart';
-
 import 'package:flutter/material.dart';
 
 class EventContainer extends StatelessWidget {

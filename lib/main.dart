@@ -21,14 +21,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     NotificationService notificationService = NotificationService();
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        fontFamily:"heliosext",
-        useMaterial3: true,
-      ),
-      home: const CheckSessions()
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          fontFamily:"heliosext",
+          useMaterial3: true,
+        ),
+        home: const CheckSessions()
     );
   }
 }
-

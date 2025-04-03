@@ -7,10 +7,8 @@ import 'package:eventurapp/containers/custom_headtext.dart';
 import 'package:eventurapp/containers/custom_input_form.dart';
 import 'package:eventurapp/database.dart';
 import 'package:eventurapp/saved_data.dart';
-import 'package:eventurapp/views/homepage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 class CreateEventPage extends StatefulWidget {
   const CreateEventPage({super.key});

@@ -47,9 +47,9 @@ class NotificationService {
   Future<void> showNotification(String? title, String? body) async {
     const AndroidNotificationDetails androidNotificationDetails =
     AndroidNotificationDetails(
-      'your channel id',
-      'your channel name',
-      channelDescription: 'your channel description',
+      'news_events',
+      'News Event',
+      channelDescription: 'An Event was created in the app',
       importance: Importance.max,
       priority: Priority.high,
       ticker: 'ticker',

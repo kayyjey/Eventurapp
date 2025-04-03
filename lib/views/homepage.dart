@@ -1,20 +1,14 @@
 import 'package:appwrite/models.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:eventurapp/auth.dart';
 import 'package:eventurapp/constants/colors.dart';
 import 'package:eventurapp/containers/event_container.dart';
 import 'package:eventurapp/database.dart';
 import 'package:eventurapp/views/create_event_page.dart';
-import 'package:eventurapp/views/event_details.dart';
-import 'package:eventurapp/views/login.dart';
 import 'package:eventurapp/views/profile_page.dart';
 import 'package:eventurapp/views/seating_page.dart';
-import 'package:eventurapp/views/test_event_info.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 
 import '../saved_data.dart';
 

@@ -1,7 +1,6 @@
-import 'package:eventurapp/views/homepage.dart';
-import "package:flutter/material.dart";
-import 'package:eventurapp/containers/custom_headtext.dart';
 import 'package:eventurapp/constants/colors.dart';
+import 'package:eventurapp/containers/custom_headtext.dart';
+import "package:flutter/material.dart";
 
 class SeatingPage extends StatefulWidget {
   const SeatingPage({super.key});

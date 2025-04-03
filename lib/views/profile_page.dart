@@ -5,7 +5,6 @@ import 'package:eventurapp/views/login.dart';
 import 'package:eventurapp/views/manage_events.dart';
 import 'package:eventurapp/views/manage_user.dart';
 import 'package:eventurapp/views/rsvp_events.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
@@ -50,11 +49,14 @@ class _ProfileState extends State<Profile> {
               width: double.infinity,
               decoration: BoxDecoration(color: Colors.brown[200],borderRadius: BorderRadius.circular(12)),
               child: Column(children: [
-                ListTile(onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>RSVPEvents())),title: Text("RSVP Events",style: TextStyle(color: brown1),),),
+                ListTile(onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>RSVPEvents())),
+                  title: Text("RSVP Events",style: TextStyle(color: brown1),),),
                 if (role.toLowerCase() != 'student')
-                ListTile(onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ManageEvents())),title: Text("Manage Events",style: TextStyle(color: brown1),),),
+                ListTile(onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ManageEvents())),
+                  title: Text("Manage Events",style: TextStyle(color: brown1),),),
                 if (role.toLowerCase() == 'admin')
-                  ListTile(onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ManageUser())),title: Text("Manage Users",style: TextStyle(color: brown1),),),
+                  ListTile(onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ManageUser())),
+                    title: Text("Manage Users",style: TextStyle(color: brown1),),),
                 ListTile(onTap: (){
                   logoutUser();
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));

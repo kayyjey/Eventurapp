@@ -1,8 +1,6 @@
 import 'package:eventurapp/auth.dart';
 import 'package:eventurapp/constants/colors.dart';
 import 'package:eventurapp/views/login.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../containers/custom_input_form.dart';

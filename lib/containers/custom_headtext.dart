@@ -1,6 +1,5 @@
 import 'package:eventurapp/constants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 class CustomHeadtext extends StatefulWidget {
   final String text;
