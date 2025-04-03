@@ -128,16 +128,16 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 25,),
-              GestureDetector(
-                onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage())),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Bypass Login", style: TextStyle(color: brown1,fontSize: 16,fontWeight: FontWeight.w500,)),
-                  ],
-                ),
-              ),
+              // SizedBox(height: 25,),
+              // GestureDetector(
+              //   onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage())),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //       Text("Bypass Login", style: TextStyle(color: brown1,fontSize: 16,fontWeight: FontWeight.w500,)),
+              //     ],
+              //   ),
+              // ),
               // SizedBox(height: 420,),
               // GestureDetector(
               //   child: Container(

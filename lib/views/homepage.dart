@@ -134,12 +134,11 @@ class _HomepageState extends State<Homepage> {
                   ),
                 ),
 
-                // Right Side: Logout + Notifications
+                // Right Side: Seating + Notifications
                 Row(
                   children: [
                     IconButton(
                       onPressed: () {
-                        logoutUser();
                         Navigator.push(
                             context, MaterialPageRoute(builder: (context) => SeatingPage()));
                       },
