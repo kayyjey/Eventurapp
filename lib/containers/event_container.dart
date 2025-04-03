@@ -1,4 +1,5 @@
 import 'package:appwrite/models.dart';
+import 'package:eventurapp/constants/colors.dart';
 import 'package:eventurapp/containers/format_datetime.dart';
 import 'package:eventurapp/views/event_details.dart';
 import 'package:eventurapp/containers/format_datetime.dart';
@@ -28,7 +29,7 @@ class EventContainer extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: const [
                   BoxShadow(
-                    color: Color.fromARGB(255, 218, 255, 123),
+                    color: kLightGreen,
                     blurRadius: 0,
                     offset: Offset(5, 5),
                   ),
@@ -70,7 +71,7 @@ class EventContainer extends StatelessWidget {
               left: 16,
               child: Row(
                 children: [
-                  const Icon(Icons.calendar_month_outlined, size: 18),
+                  const Icon(Icons.calendar_month_outlined, size: 18, color: Colors.white,),
                   const SizedBox(width: 4),
                   Text(
                     formatDate(data.data["datetime"]),
@@ -81,7 +82,7 @@ class EventContainer extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 14),
-                  const Icon(Icons.access_time_rounded, size: 18),
+                  const Icon(Icons.access_time_rounded, size: 18, color: Colors.white,),
                   const SizedBox(width: 4),
                   Text(
                     formatTime(data.data["datetime"]),
@@ -99,7 +100,7 @@ class EventContainer extends StatelessWidget {
                 left: 16,
                 child: Row(
                   children: [
-                    const Icon(Icons.location_on_outlined, size: 18),
+                    const Icon(Icons.location_on_outlined, size: 18, color: Colors.white,),
                     const SizedBox(width: 4),
                     Text(
                       data.data["location"],

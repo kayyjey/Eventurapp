@@ -223,7 +223,7 @@ class _HomepageState extends State<Homepage> {
                         aspectRatio: 16 / 9,
                         viewportFraction: 1.0,
                         enlargeCenterPage: false,
-                        scrollPhysics: NeverScrollableScrollPhysics(),
+                        //scrollPhysics: NeverScrollableScrollPhysics(),
 
                       ),
                       items: List.generate(

@@ -46,6 +46,8 @@ dependencies:
   carousel_slider: ^5.0.0
   flutter_local_notifications:
   permission_handler:
+  image_picker:
+  cross_file:
 
 dev_dependencies:
   flutter_test:
