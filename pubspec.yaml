@@ -40,7 +40,7 @@ dependencies:
   image_picker_web:
   file_picker:
   animated_text_kit: ^4.2.3
-  flutter_launcher_icons: ^0.14.3
+
   focused_menu: ^1.0.5
   intl: ^0.20.2
   carousel_slider: ^5.0.0
@@ -52,6 +52,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.3
 
 flutter_launcher_icons:
   android: "launcher_icon"
