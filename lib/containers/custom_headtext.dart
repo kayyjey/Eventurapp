@@ -13,6 +13,6 @@ class CustomHeadtext extends StatefulWidget {
 class _CustomHeadtextState extends State<CustomHeadtext> {
   @override
   Widget build(BuildContext context) {
-    return Text(widget.text,style: TextStyle(color: oat1,fontSize: 32,fontWeight: FontWeight.w600));
+    return Text(widget.text,style: TextStyle(color: kLightGreen,fontSize: 32,fontWeight: FontWeight.w600));
   }
 }

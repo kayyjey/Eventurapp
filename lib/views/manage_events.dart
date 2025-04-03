@@ -35,7 +35,7 @@ class _ManageEventsState extends State<ManageEvents> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Manage Events"),),
+      appBar: AppBar(title: Text("Manage Events",style: TextStyle(color: kLightGreen),),),
       body: ListView.builder(
           itemCount: userCreatedEvents.length,
           itemBuilder: (context,index) => Card(child: ListTile(

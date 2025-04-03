@@ -43,7 +43,7 @@ class _RSVPEventsState extends State<RSVPEvents> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text("RSVP Events"),),
+    return Scaffold(appBar: AppBar(title: Text("RSVP Events",style: TextStyle(color: kLightGreen),),),
     body: ListView.builder(
         itemCount: userEvents.length,
         itemBuilder: (context,index) => Card(child: ListTile(

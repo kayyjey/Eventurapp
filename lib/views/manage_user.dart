@@ -45,7 +45,7 @@ class _ManageUserState extends State<ManageUser> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text("Manage Users")),
+      appBar: AppBar(title: Text("Manage Users",style: TextStyle(color: kLightGreen),)),
       body: ListView.builder(
         itemCount: userList.length,
         itemBuilder: (context, index) {
