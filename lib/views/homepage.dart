@@ -231,7 +231,7 @@ class _HomepageState extends State<Homepage> {
                       child: Text(
                         " Events ",
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.blueGrey,
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'vipinorg',

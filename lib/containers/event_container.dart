@@ -1,4 +1,5 @@
 import 'package:appwrite/models.dart';
+import 'package:eventurapp/constants/colors.dart';
 import 'package:eventurapp/containers/format_datetime.dart';
 import 'package:eventurapp/views/event_details.dart';
 import 'package:eventurapp/containers/format_datetime.dart';
@@ -25,17 +26,17 @@ class EventContainer extends StatelessWidget {
               margin: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: const Color(0xFF2A2D3E),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(35),
                 boxShadow: const [
                   BoxShadow(
-                    color: Color.fromARGB(255, 218, 255, 123),
+                    color: kLightGreen,
                     blurRadius: 0,
-                    offset: Offset(5, 5),
+                    offset: Offset(1, 10),
                   ),
                 ],
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(35),
                 child: ColorFiltered(
                   colorFilter: ColorFilter.mode(
                     Colors.black.withOpacity(0.35),
@@ -50,7 +51,7 @@ class EventContainer extends StatelessWidget {
             ),
             Positioned(
               bottom: 70,
-              left: 16,
+              left: 35,
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: Text(
