@@ -115,7 +115,7 @@ class _EditEventPageState extends State<EditEventPage> {
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
               Color.fromARGB(253, 239, 239, 239),
-              Color.fromARGB(253, 207, 192, 180),
+              Color.fromARGB(253, 244, 237, 231),
 
             ])
         ),
@@ -141,20 +141,23 @@ class _EditEventPageState extends State<EditEventPage> {
                 SizedBox(height: 15,),
                 GestureDetector(
                   onTap: ()=>_openFilePicker(),
-                  child: Container(
-                    width: double.infinity,
-                    height: MediaQuery.of(context).size.height*.3,
-                    decoration: BoxDecoration(color: kLightGreen,borderRadius: BorderRadius.circular(8)),
-                    child: _filePickerResult!=null?
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image(image: FileImage(File(_filePickerResult!.files.first.path!)),
-                        fit: BoxFit.fill,),
-                    ):
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.network("https://cloud.appwrite.io/v1/storage/buckets/67a0ea89003df90b8242/files/${widget.image}/view?project=679780d900000280dfd0",
-                      fit: BoxFit.fill,)
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height*.3,
+                      decoration: BoxDecoration(color: kLightGreen,borderRadius: BorderRadius.circular(35)),
+                      child: _filePickerResult!=null?
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(35),
+                        child: Image(image: FileImage(File(_filePickerResult!.files.first.path!)),
+                          fit: BoxFit.fill,),
+                      ):
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(35),
+                        child: Image.network("https://cloud.appwrite.io/v1/storage/buckets/67a0ea89003df90b8242/files/${widget.image}/view?project=679780d900000280dfd0",
+                        fit: BoxFit.fill,)
+                      ),
                     ),
                   ),
                 ),
@@ -189,93 +192,112 @@ class _EditEventPageState extends State<EditEventPage> {
                 ),
                 SizedBox(height: 15,),
 
-                Row(
-                  children: [
-                    Text("In Person Event", style: TextStyle(color: kLightGreen, fontSize: 20, fontWeight: FontWeight.w600),),
-                    Spacer(),
-                    Switch(
-                        activeColor: kLightGreen,
-                        focusColor: Colors.black,
-                        value: _isInPersonEvent, onChanged: (value){
-                      setState(() {
-                        _isInPersonEvent = value;
-                      });
-                    }),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal:25 ,vertical:7 ),
+                  child: Row(
+                    children: [
+                      Text("In Person Event", style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500),),
+                      Spacer(),
+                      Switch(
+                          activeColor: kLightGreen,
+                          focusColor: Colors.black,
+                          value: _isInPersonEvent, onChanged: (value){
+                        setState(() {
+                          _isInPersonEvent = value;
+                        });
+                      }),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 8,),
                 SizedBox(
-                  height: 50,
+                  height: 55,
                   width: double.infinity,
-                  child: MaterialButton(
-                    color: kLightGreen,
-                    onPressed: (){
-                      if(_nameController.text==""||_descController.text==""||_locationController.text==""||_dateTimeController==""){
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Event Name,Description,Location,Date & Time are required"),));
-                      }
-                      else {
-                        if(_filePickerResult==null){
-                          updateEvent(_nameController.text, _descController.text, _locationController.text, _dateTimeController.text, widget.image,userId, _isInPersonEvent, _activityPointsController.text, _priceController.text, widget.docID)
-                              .then((value)=> {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Event Updated")),),
-                            Navigator.pop(context),
-                          });
+                  child: Padding( padding: EdgeInsets.symmetric(horizontal: 20,vertical: 2),
+                    child: Container(decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.purple, Colors.pink, Colors.blue],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(35), // Same radius as button
+                    ),
+                      padding: EdgeInsets.all(3),
+                    child: ElevatedButton(
+                      onPressed: (){
+                        if(_nameController.text==""||_descController.text==""||_locationController.text==""||_dateTimeController==""){
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Event Name,Description,Location,Date & Time are required"),));
                         }
                         else {
-                          uploadEventImage().then((value) =>
-                              updateEvent(
-                                  _nameController.text,
-                                  _descController.text,
-                                  _locationController.text,
-                                  _dateTimeController.text,
-                                  value,
-                                  userId,
-                                  _isInPersonEvent,
-                                  _activityPointsController.text,
-                                  _priceController.text,
-                                  widget.docID))
-                              .then((value) =>
-                          {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Event Updated")),),
-                            Navigator.pop(context),
-                          });
+                          if(_filePickerResult==null){
+                            updateEvent(_nameController.text, _descController.text, _locationController.text, _dateTimeController.text, widget.image,userId, _isInPersonEvent, _activityPointsController.text, _priceController.text, widget.docID)
+                                .then((value)=> {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Event Updated")),),
+                              Navigator.pop(context),
+                            });
+                          }
+                          else {
+                            uploadEventImage().then((value) =>
+                                updateEvent(
+                                    _nameController.text,
+                                    _descController.text,
+                                    _locationController.text,
+                                    _dateTimeController.text,
+                                    value,
+                                    userId,
+                                    _isInPersonEvent,
+                                    _activityPointsController.text,
+                                    _priceController.text,
+                                    widget.docID))
+                                .then((value) =>
+                            {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Event Updated")),),
+                              Navigator.pop(context),
+                            });
+                          }
                         }
-                      }
-                    },
-                    child: Text("Update Event",
-                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900, fontSize: 20),),
+                      },
+                      child: Text("Update Event",
+                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 18),),
+                    ),
                   ),
-                ),
+                )),
                 SizedBox(height: 12,),
-                Text("Danger Zone",style: TextStyle(color: Colors.red, fontWeight: FontWeight.w600, fontSize: 20),),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 7),
+                  child: Text("Danger Zone",style: TextStyle(color: Colors.red, fontWeight: FontWeight.w600, fontSize: 20),),
+                ),
                 SizedBox(height: 8,),
             SizedBox(
               height: 50,
               width: double.infinity,
-              child: MaterialButton(
-                color: Colors.red[400],
-                onPressed: (){
-                  showDialog(context: context, builder: (context)=> AlertDialog(
-                    title: Text("Are you sure?",style: TextStyle(color: kLightGreen),),
-                  content: Text("Your event will be deleted",style: TextStyle(color: kLightGreen)),
-                    actions: [
-                      TextButton(onPressed: (){
-                        deleteEvent(widget.docID).then((value) async{
-                          await storage.deleteFile(bucketId: "67a0ea89003df90b8242",fileId: widget.image);
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Event has been Deleted Successfully")));
-                            Navigator.pop(context);
-                            Navigator.pop(context);
-                        });
-                      }, child: Text("Yes",style: TextStyle(color: Colors.red[400]),)),
-                      TextButton(onPressed: (){
-                        Navigator.pop(context);
-                      }, child: Text("No",style: TextStyle(color: brown1))),
-                    ],
-                  ));
-                },
-                child: Text("Delete Event",
-                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900, fontSize: 20),),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 2),
+                child: MaterialButton(
+                  color: Colors.red[400],
+                  onPressed: (){
+                    showDialog(context: context, builder: (context)=> AlertDialog(
+                      title: Text("Are you sure?",style: TextStyle(color: kLightGreen),),
+                    content: Text("Your event will be deleted",style: TextStyle(color: kLightGreen)),
+                      actions: [
+                        TextButton(onPressed: (){
+                          deleteEvent(widget.docID).then((value) async{
+                            await storage.deleteFile(bucketId: "67a0ea89003df90b8242",fileId: widget.image);
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Event has been Deleted Successfully")));
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                          });
+                        }, child: Text("Yes",style: TextStyle(color: Colors.red[400]),)),
+                        TextButton(onPressed: (){
+                          Navigator.pop(context);
+                        }, child: Text("No",style: TextStyle(color: brown1))),
+                      ],
+                    ));
+                  },
+                  child: Text("Delete Event",
+                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900, fontSize: 20),),
+                ),
               ),
             ),
 

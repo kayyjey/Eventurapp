@@ -106,7 +106,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
               Color.fromARGB(253, 239, 239, 239),
-              Color.fromARGB(253, 207, 192, 180),
+              Color.fromARGB(255, 248, 236, 225),
 
             ])
         ),
@@ -126,8 +126,17 @@ class _CreateEventPageState extends State<CreateEventPage> {
                         icon: Icon(Icons.arrow_back_ios_new_outlined, size: 26, color: kLightGreen,),
                     ),
                     SizedBox(width: 10,),
-                    DefaultTextStyle(style:TextStyle(color: Colors.blue, fontSize: 20, fontWeight: FontWeight.bold),
-                    child: CustomHeadtext(text: "Create Event")),
+                    Container(
+                      color: Colors.transparent, // Keeps background clear
+                      child: Text(
+                        "Create Event",
+                        style: TextStyle(
+                          color: kLightGreen, // ✅ Force color change here
+                          fontSize: 30,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    )
                   ],
                 ),
                 SizedBox(height: 15,),
@@ -138,10 +147,10 @@ class _CreateEventPageState extends State<CreateEventPage> {
                     child: Container(
                       width: double.infinity,
                       height: MediaQuery.of(context).size.height*.3,
-                      decoration: BoxDecoration(color: Colors.black,borderRadius: BorderRadius.circular(15)),
+                      decoration: BoxDecoration(color: Colors.black,borderRadius: BorderRadius.circular(35)),
                       child: _filePickerResult!=null?
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(35),
                         child: Image(image: FileImage(File(_filePickerResult!.files.first.path!)),
                         fit: BoxFit.fill,),
                       ):
@@ -183,46 +192,60 @@ class _CreateEventPageState extends State<CreateEventPage> {
                   controller: _priceController,
                   icon: Icons.attach_money_outlined,label: "Price", hint: "Enter the participation cost",
                 ),
-                SizedBox(height: 15,),
+                SizedBox(height: 10,),
 
-                Row(
-                  children: [
-                    Text("In Person Event", style: TextStyle(color: kLightGreen, fontSize: 20),),
-                    Spacer(),
-                    Switch(
-                        activeColor: kLightGreen,
-                        focusColor: Colors.black,
-                        value: _isInPersonEvent, onChanged: (value){
-                      setState(() {
-                        _isInPersonEvent = value;
-                      });
-                    }),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 7),
+                  child: Row(
+                    children: [
+                      Text("In Person Event", style: TextStyle(color: Colors.black, fontSize: 20),),
+                      Spacer(),
+                      Switch(
+                          activeColor: kLightGreen,
+                          focusColor: Colors.black,
+                          value: _isInPersonEvent, onChanged: (value){
+                        setState(() {
+                          _isInPersonEvent = value;
+                        });
+                      }),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 8,),
                 SizedBox(
-                  height: 50,
+                  height: 55,
                   width: double.infinity,
-                  child: MaterialButton(
-                  color: kLightGreen,
-                    onPressed: (){
-                    if(_filePickerResult == null||_nameController.text==""||_descController.text==""||_locationController.text==""||_dateTimeController==""){
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Event Image,Event Name,Description,Location,Date & Time are required"),));
-                    }
-                    else {
-                      uploadEventImage().then((value)=> createEvent(_nameController.text, _descController.text, _locationController.text, _dateTimeController.text, value,userId, _isInPersonEvent, _activityPointsController.text, _priceController.text))
-                          .then((value)=> {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Event Created")),),
-                      Navigator.pop(context),
-                      });
-                    }
-                    },
-                  child: Text("Create New Event",
-                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900, fontSize: 20),),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20,vertical: 2),
+                    child: Container(decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.purple, Colors.pink, Colors.blue],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(35), // Same radius as button
+                    ),
+                      padding: EdgeInsets.all(3),
+                    child: ElevatedButton(
+                      onPressed: (){
+                      if(_filePickerResult == null||_nameController.text==""||_descController.text==""||_locationController.text==""||_dateTimeController==""){
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Event Image,Event Name,Description,Location,Date & Time are required"),));
+                      }
+                      else {
+                        uploadEventImage().then((value)=> createEvent(_nameController.text, _descController.text, _locationController.text, _dateTimeController.text, value,userId, _isInPersonEvent, _activityPointsController.text, _priceController.text))
+                            .then((value)=> {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Event Created")),),
+                        Navigator.pop(context),
+                        });
+                      }
+                      },
+                    child: Text("Create New Event",
+                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 18),),
+                    ),
                   ),
                 )
 
-              ],
+                )],
             ),
           ),
         ),

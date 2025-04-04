@@ -100,7 +100,7 @@ class _HomepageState extends State<Homepage> {
                   },
                   icon: Icon(
                     Icons.account_circle_outlined,
-                    color: kLightGreen,
+                    color: Colors.blueGrey,
                     size: 30,
                   ),
                 ),
@@ -138,7 +138,7 @@ class _HomepageState extends State<Homepage> {
                       },
                       icon: Icon(
                         Icons.contact_page_outlined,
-                        color: kLightGreen,
+                        color: Colors.blueGrey,
                         size: 30,
                       ),
                     ),
@@ -157,7 +157,7 @@ class _HomepageState extends State<Homepage> {
                       openWithTap: true,
                       child: Icon(
                         Icons.notifications_none_outlined,
-                        color: kLightGreen,
+                        color: Colors.blueGrey,
                         size: 30,
                       ),
                       onPressed: () {},
@@ -251,18 +251,34 @@ class _HomepageState extends State<Homepage> {
       ),
       floatingActionButton: isStudentRole
           ? null
-          : FloatingActionButton(
-        onPressed: () async {
-          await Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CreateEventPage()));
-          refresh();
-        },
-        child: Icon(
-          Icons.add,
-          color: Colors.black,
-        ),
-        backgroundColor: kLightGreen,
-      ),
-    );
+          : Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 2),
+    child: Container(
+      width: 65,
+      height: 65,
+      decoration: BoxDecoration(
+    gradient: LinearGradient(
+    colors: [Colors.purple, Colors.pink, Colors.blue],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    ),
+        borderRadius: BorderRadius.circular(20),// Same radius as button
+    ),
+    padding: EdgeInsets.all(3),
+            child: FloatingActionButton(
+
+                    onPressed: () async {
+            await Navigator.push(context,
+                MaterialPageRoute(builder: (context) => CreateEventPage()));
+            refresh();
+                    },
+                    child: Icon(
+            Icons.add,
+            color: Colors.black,
+                    ),
+                    backgroundColor: Color.fromARGB(255, 250, 242, 249),
+                  ),
+          ),
+    ));
   }
 }
