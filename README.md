@@ -1,7 +1,6 @@
 # eventurapp
 
 A new Flutter project.
-ffff
 ## Getting Started
 
 This project is a starting point for a Flutter application.
